@@ -12,7 +12,6 @@ public class Runner {
     private static HashMap<String, String> textureFDID;
     private static final String[] tables = new String[12];
     public static void main(String[] args) throws IOException{
-        int count = 0;
         fillTable();
         startupTables();
         sortInfoMatRes();
@@ -33,7 +32,6 @@ public class Runner {
                                 filename = fileIDs.get(modelFDID.get(displayRow[11]));
                             }else if(fileIDs.get(modelFDID.get(displayRow[10])) == null){
                                 filename = "";
-                                count++;
                             }else{
                                 filename = fileIDs.get(modelFDID.get(displayRow[10]));
                             }
@@ -44,7 +42,6 @@ public class Runner {
                 }
             }
         }
-        System.out.println(count);
     }
     //sorts itemdisplayinfomaterialres to put all displayIDs in groups for parsing later(cause blizzard cant keep their shit together)
     private static void sortInfoMatRes() throws IOException {
