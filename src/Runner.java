@@ -16,6 +16,7 @@ public class Runner {
         startupTables();
         sortInfoMatRes();
         HashMap<String, String> itemDisplayInfoMaterials = setupDisplayExtraItemsMap(tables[3] + "Sorted" + csvEndSuffix);
+        FileWriter listfileWriter = new FileWriter("listfileNEW.csv");
         try (BufferedReader br = new BufferedReader(new FileReader(tables[2] + csvEndSuffix))) {
             String line;
             br.readLine();//skip header
@@ -30,18 +31,22 @@ public class Runner {
                         if(fileIDs.get(textureFDID.get(currItem[1])) == null){//materialID exists, but no path found
                             if(displayRow[10].equals("0") && !displayRow[11].equals("0") && fileIDs.get(modelFDID.get(displayRow[11])) != null){
                                 filename = fileIDs.get(modelFDID.get(displayRow[11]));
+                                filename = filename.substring(0,filename.length() - 3) + "_";
                             }else if(fileIDs.get(modelFDID.get(displayRow[10])) == null){
                                 filename = "";
                             }else{
                                 filename = fileIDs.get(modelFDID.get(displayRow[10]));
+                                filename = filename.substring(0,filename.length() - 3) + "_";
                             }
                             if(textureFDID.get(currItem[1]) != null)
-                        System.out.println(filename  + textureFDID.get(currItem[1]) + ".blp");
+                        System.out.println(textureFDID.get(currItem[1]) + ";"+filename + textureFDID.get(currItem[1]) + ".blp");
+                            listfileWriter.write(textureFDID.get(currItem[1]) + ";"+filename + textureFDID.get(currItem[1]) + ".blp\n");
                         }
                     }
                 }
             }
         }
+        listfileWriter.close();
     }
     //sorts itemdisplayinfomaterialres to put all displayIDs in groups for parsing later(cause blizzard cant keep their shit together)
     private static void sortInfoMatRes() throws IOException {
