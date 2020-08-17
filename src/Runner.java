@@ -31,16 +31,44 @@ public class Runner {
                         if(fileIDs.get(textureFDID.get(currItem[1])) == null){//materialID exists, but no path found
                             if(displayRow[10].equals("0") && !displayRow[11].equals("0") && fileIDs.get(modelFDID.get(displayRow[11])) != null){
                                 filename = fileIDs.get(modelFDID.get(displayRow[11]));
-                                filename = filename.substring(0,filename.length() - 3) + "_";
+                                filename = filename.split("/")[filename.split("/").length -1];
+                                filename = filename.substring(0,filename.length() - 8) + "_";
                             }else if(fileIDs.get(modelFDID.get(displayRow[10])) == null){
                                 filename = "";
                             }else{
                                 filename = fileIDs.get(modelFDID.get(displayRow[10]));
-                                filename = filename.substring(0,filename.length() - 3) + "_";
+                                filename = filename.split("/")[filename.split("/").length -1];
+                                filename = filename.substring(0,filename.length() - 8) + "_";
                             }
-                            if(textureFDID.get(currItem[1]) != null)
-                        System.out.println(textureFDID.get(currItem[1]) + ";"+filename + textureFDID.get(currItem[1]) + ".blp");
-                            listfileWriter.write(textureFDID.get(currItem[1]) + ";"+filename + textureFDID.get(currItem[1]) + ".blp\n");
+                            if(textureFDID.get(currItem[1]) != null) {
+                                switch (currItem[0]) {
+                                    case "0":
+                                        listfileWriter.write(textureFDID.get(currItem[1]) + ";" + "Item\\TEXTURECOMPONENTS\\ArmUpperTexture\\" + filename + textureFDID.get(currItem[1]) + "_au_u.blp\n");
+                                        break;
+                                    case "1":
+                                        listfileWriter.write(textureFDID.get(currItem[1]) + ";"+ "Item\\TEXTURECOMPONENTS\\ArmLowerTexture\\" + filename + textureFDID.get(currItem[1]) + "_al_u.blp\n");
+                                        break;
+                                    case "2":
+                                        listfileWriter.write(textureFDID.get(currItem[1]) + ";" + "Item\\TEXTURECOMPONENTS\\HandTexture\\" + filename + textureFDID.get(currItem[1]) + "_ha_u.blp\n");
+                                        break;
+                                    case "3":
+                                        listfileWriter.write(textureFDID.get(currItem[1]) + ";"+ "Item\\TEXTURECOMPONENTS\\TorsoUpperTexture\\" + filename + textureFDID.get(currItem[1]) + "_tu_u.blp\n");
+                                        break;
+                                    case "4":
+                                        listfileWriter.write(textureFDID.get(currItem[1]) + ";" + "Item\\TEXTURECOMPONENTS\\TorsoLowerTexture\\" + filename + textureFDID.get(currItem[1]) + "_tl_u.blp\n");
+                                        break;
+                                    case "5":
+                                        listfileWriter.write(textureFDID.get(currItem[1]) + ";" + "Item\\TEXTURECOMPONENTS\\LegUpperTexture\\" + filename + textureFDID.get(currItem[1]) + "_lu_u.blp\n");
+                                        break;
+                                    case "6":
+                                        listfileWriter.write(textureFDID.get(currItem[1]) + ";" + "Item\\TEXTURECOMPONENTS\\LegLowerTexture\\" + filename + textureFDID.get(currItem[1]) + "_ll_u.blp\n");
+                                        break;
+                                    case "7":
+                                        listfileWriter.write(textureFDID.get(currItem[1]) + ";" + "Item\\TEXTURECOMPONENTS\\FootTexture\\" + filename + textureFDID.get(currItem[1]) + "_fo_u.blp\n");
+                                        break;
+                                }
+
+                            }
                         }
                     }
                 }
